@@ -1,0 +1,26 @@
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+.center-text {
+  text-align: center;
+}
+form.contact {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  align-items: center;
+}
+
+button {
+  margin-bottom: 10px;
+  width: 30%;
+}
+button:hover:enabled {
+  color: black;
+}
+mat-form-field {
+  width: 300px !important;
+}

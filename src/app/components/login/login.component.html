@@ -1,0 +1,60 @@
+<div>
+    <mat-toolbar color="primary">
+      <span>Login</span>
+    </mat-toolbar>
+    <div class="center-text">
+      <form class="contact" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h3>Wellthy Demo App</h3>
+        <mat-form-field>
+          <mat-label>UserId</mat-label>
+          <input matInput [formControl]="login" required />
+          <mat-error style="font-size: 10px" *ngIf="login.invalid"
+            >Please enter Valid Login id</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input
+            formControlName="password"
+            [formControl]="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            style="border: none"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon (click)="hide = !hide">{{
+              hide ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+          <div
+            style="color: red"
+            *ngIf="
+              form.get('password')?.invalid &&
+              (form.get('password')?.touched || form.get('password')?.dirty)
+            "
+          >
+            <div
+              style="font-size: 10px"
+              *ngIf="form.get('password')?.hasError('required')"
+            >
+              password is required
+            </div>
+          </div>
+        </mat-form-field>
+        <button
+          [disabled]="isLoading"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+  

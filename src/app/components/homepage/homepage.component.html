@@ -1,0 +1,133 @@
+<!-- Toolbar start -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Wellthy Brew House</span>
+      <span class="example-spacer"></span>
+      <button
+        mat-icon-button
+        class="example-icon"
+        (click)="logout()"
+      >
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- Toolbar end -->
+  <!-------------------------------------------------------------------------------------------------------->
+  <div id="root">
+    <!-- On initial load, show the user a random beer START -->
+    <mat-card class="example-card mt-2"  *ngIf="random_beer_data?.length > '0' && beerName && beerDescription; else default" >
+      <div class="container">
+        <div class="row">
+      
+          <div class="col-2" >
+            <div class="row">
+              <span>{{beerName}}</span>
+            </div>
+            <div class="center" *ngIf="beerImageURL; else default_image"  >
+              <img style="height: 120px;width: fit-content;" src="{{beerImageURL}}" >
+            </div>
+            <ng-template #default_image>
+              <img style="height: 120px;width: 100px;" src="https://w7.pngwing.com/pngs/544/322/png-transparent-water-bottle-plastic-bottle-bottle-bottle-glass-alcohol-bottle-wine-bottle.png">
+              </ng-template>
+          </div>
+          <div class="col-8" >
+            {{beerDescription}}
+            <div *ngIf="isLoading === true" class="d-flex justify-content-center"><mat-spinner [diameter]="50"></mat-spinner></div>
+          </div>
+          <div class="col-2">
+           <div class="row mt-1">
+            <button (click)="anotherBeer_btnclick()" mat-raised-button color="primary">Another Beer</button>
+           </div>
+           <div class="row mt-4">
+            <button (click)="radomNHbeer_btnclick()"  mat-raised-button color="primary" class="nonalcoholic">Random Non-Alcoholic Beer</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  <!-------------------------------------------------------------------------------------------------------->
+    <!-- To handle empty response START -->
+    <ng-template #default>
+      <mat-card class="example-card mt-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-2" >
+              <div class="row">
+                <span>Not Available</span>
+              </div>
+              <div class="center" >
+                <img style="height: 120px;width: 100px;" src="https://w7.pngwing.com/pngs/544/322/png-transparent-water-bottle-plastic-bottle-bottle-bottle-glass-alcohol-bottle-wine-bottle.png" >
+              </div>
+            </div>
+            <div class="col-8 center" >
+              There is no Non-Alcoholic Beer Available
+            </div>
+            <div class="col-2">
+             <div class="row mt-1">
+              <button (click)="anotherBeer_btnclick()" mat-raised-button color="primary">Another Beer</button>
+             </div>
+             <div class="row mt-4">
+              <button (click)="radomNHbeer_btnclick()"  mat-raised-button color="primary" class="nonalcoholic">Random Non-Alcoholic Beer</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </ng-template>
+    <!-- To handle empty response END -->
+      <mat-divider></mat-divider>
+      <br>
+      <!-- On initial load, show the user a random beer END -->
+  <!-------------------------------------------------------------------------------------------------------->
+      <!-- Search Bar START -->
+      <div class="row">
+        <div class="col-6">
+          <div class="input-group flex-nowrap ml-1">
+            <span class="input-group-text" id="addon-wrapping"><mat-icon>search</mat-icon></span>
+            <input #search type="text" class="form-control" placeholder="Search beer" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+          </div>
+          <div class="col-4">
+            <mat-radio-group (change)="radioChange($event)" aria-label="Select an option">
+              <mat-radio-button value="name" checked="checked" >by name</mat-radio-button>
+              <mat-radio-button value="description">by Description</mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button color="primary" style="margin-left:10px" (click)="seachItem(search.value)">Search</button>
+          </div>
+    </div>
+    <!-- Search Bar END -->
+  <!-------------------------------------------------------------------------------------------------------->
+    <!-- Search Result List START -->
+    <div class="row mt-1" *ngIf="searchResult?.length > '0'">
+      <cdk-virtual-scroll-viewport itemSize="20" class="viewport">
+        <div *cdkVirtualFor="let item of searchResult" class="search-item">
+          <mat-card>
+            <div class="container">
+              <div class="row">
+                <div class="col-2">
+                  <div class="center" *ngIf="item.image_url; else default_image">
+                    <img style="height: 100px;width: fit-content;" src="{{item.image_url}}" >
+                  </div>
+                  <ng-template #default_image>
+                    <img style="height: 100px;width: fit-content;" src="https://w7.pngwing.com/pngs/544/322/png-transparent-water-bottle-plastic-bottle-bottle-bottle-glass-alcohol-bottle-wine-bottle.png">
+                    </ng-template>
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <span>{{item.name}}</span>
+                  </div>
+                  <div class="row">
+                    {{item.description}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  <!-- Search Result List START -->
+  </div>
+ <!--------------------------------------------------------------------------------------------------------> 
+  
