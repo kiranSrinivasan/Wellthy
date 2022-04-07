@@ -29,10 +29,10 @@ For Mac: `open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chr
 `User name` : 'wellthy', 'alok', 'kiran',"Demo"
 `password` : Asd@1234
 
-<!-- Extra features which can added are as follows -->
+## Extra features which can added are as follows
 
-# Pagination for the search result
+Pagination for the search result
 
-# search by can be a drop down with all the parameters
+search by can be a drop down with all the parameters
 
 
